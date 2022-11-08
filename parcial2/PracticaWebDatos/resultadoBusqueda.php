@@ -22,35 +22,37 @@
     ?>
         <br>
         <div class="alert alert-danger">No existen registros con ese término de búsqueda</div><br><br>
-        <a href="consultarDatos.php">Regresar</a>
+        <a href="consultarDatos_Auto.php">Regresar</a>
     <?php } else { 
-        $sql = "SELECT * from usuarios WHERE nombre LIKE '%" . $_GET["termino"] . "%'";
-        $usuarios = $conexion->query($sql);
-        if($usuarios->num_rows == 0) {
+        $sql = "SELECT * from automovil WHERE id LIKE '%" . $_GET["termino"] . "%'";
+        $id= $conexion->query($sql);
+        if($id->num_rows == 0) {
             echo "<br><div class='alert alert-danger'>No existen registros con ese término de búsqueda</div><br><br>";
         } else {
     ?>
         <table class="table table-hover">
             <thead>
                 <th>ID</th>
-                <th>Nombre</th>
-                <th>Edad</th>
-                <th>Sexo</th>
-                <th>Domicilio</th>
-                <th>Fecha de Nacimiento</th>
+                <th>Marca</th>
+                <th>Modelo</th>
+                <th>Placas</th>
+                <th>Color</th>
+                <th>Tarjeta de circulación</th>
+                <th>Propietario</th>
             </thead>
             <tbody>
-                <?php while($row = $usuarios->fetch_assoc()) { ?>
+                <?php while($row = $id->fetch_assoc()) { ?>
                     <tr>
                         <td><?php echo $row["id"]; ?></td>
-                        <td><?php echo $row["nombre"]; ?></td>
-                        <td><?php echo $row["edad"]; ?></td>
-                        <td><?php echo $row["sexo"]; ?></td>
-                        <td><?php echo $row["domicilio"]; ?></td>
-                        <td><?php echo $row["fecha_nacimiento"]; ?></td>
+                        <td><?php echo $row["marca"]; ?></td>
+                        <td><?php echo $row["modelo"]; ?></td>
+                        <td><?php echo $row["placas"]; ?></td>
+                        <td><?php echo $row["color"]; ?></td>
+                        <td><?php echo $row["tarjeta"]; ?></td>
+                        <td><?php echo $row["propietario"]; ?></td>
                         <td>
-                            <a href="actualizarRegistro.php?id=<?php echo $row["id"]; ?>" class="btn btn-primary">Editar</a>
-                            <a href="eliminarRegistro.php?id=<?php echo $row["id"]; ?>" class="btn btn-danger">Eliminar</a>
+                            <a href="actualizarRegistro_Auto.php?id=<?php echo $row["id"]; ?>" class="btn btn-primary">Editar</a>
+                            <a href="eliminarRegistro_Auto.php?id=<?php echo $row["id"]; ?>" class="btn btn-danger">Eliminar</a>
                         </td>
                     </tr>
                 <?php } ?>
